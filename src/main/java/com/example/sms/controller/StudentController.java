@@ -29,4 +29,9 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
+    // REST API to get student by id
+    @GetMapping("{id}")
+    public ResponseEntity<Student> getStudentById(@PathVariable("id") long id){
+        return new ResponseEntity<Student>(studentService.getStudentById(id), HttpStatus.OK);
+    }
 }
