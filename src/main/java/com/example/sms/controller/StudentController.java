@@ -2,10 +2,14 @@ package com.example.sms.controller;
 
 import com.example.sms.model.Student;
 import com.example.sms.service.StudentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/api/students")
 public class StudentController {
     private StudentService studentService;
 
@@ -13,8 +17,16 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    // Student REST API
-    public ResponseEntity<Student> saveStudent(){
-        
+    // Student create REST API
+    @PostMapping()
+    public ResponseEntity<Student> saveStudent(@RequestBody Student student){
+        return new ResponseEntity<Student>(studentService.saveStudent(student), HttpStatus.CREATED);
     }
+
+    // Get all students REST API
+    @GetMapping()
+    public List<Student> getAllStudents(){
+        return studentService.getAllStudents();
+    }
+
 }
