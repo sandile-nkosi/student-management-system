@@ -34,4 +34,18 @@ public class StudentController {
     public ResponseEntity<Student> getStudentById(@PathVariable("id") long id){
         return new ResponseEntity<Student>(studentService.getStudentById(id), HttpStatus.OK);
     }
+
+    // REST API to update existing student
+    @PutMapping("{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable("id") long id, @RequestBody Student student){
+        return new ResponseEntity<Student>(studentService.updateStudent(student, id), HttpStatus.OK);
+    }
+
+    // REST API to delete existing student
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteStudent(@PathVariable("id") long id){
+        studentService.deleteEmployee(id);
+
+        return new ResponseEntity<String>("Student record deleted!", HttpStatus.OK);
+    }
 }
